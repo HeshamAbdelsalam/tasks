@@ -10,9 +10,6 @@ namespace Task1
     {
         static void Main(string[] args)
         {
-            bool loop = false;
-            do
-            {
                 Console.WriteLine("-----------declarng the array to work on-----------  ");
                 //Console.WriteLine("-3>-2={0}",-3>-2?true:false);
                 Console.Write("enter array width=");
@@ -87,16 +84,9 @@ namespace Task1
                     Console.WriteLine("the target[{0},{1},{2}]={3}", x, y, z, target.value);
                 } while (targetError);
 
-
-                //-------------------------------------
                 ArrayElement res = getClosestElement(arrayWidth, arrayHeight, arrayDepth, arr, target);
                 Console.WriteLine("the nearst element is[{0},{1},{2}]={3}", res.x, res.y, res.z, res.value);
 
-                Console.WriteLine("to try again press 1 to exit press any key");
-                string confirm = Console.ReadLine();
-                if (confirm != "1")
-                    loop = false;
-            } while (loop);
             Console.ReadLine();
         }//end of main()
 
@@ -105,32 +95,23 @@ namespace Task1
         public static ArrayElement getClosestElement(int arrayWidth,int arrayHeight,int arrayDepth,ArrayElement[,,] arr ,ArrayElement target)
         {
             bool getFisrtElemment = true;
-         
             for (int i = 0; i < arrayDepth; i++)
             {
                 for (int k = 0; k < arrayHeight; k++)
                 {
                     for (int j = 0; j < arrayWidth; j++)
                     {
-                       
-                            if ((arr[j, k, i].value >= target.value))
+                            if ((arr[j, k, i].value > target.value))
                             {
                                 if(getFisrtElemment)
                                 {
                                     resElement = arr[j, k, i];
                                     getFisrtElemment = false;
                                     continue;
-
                                 }
-                            if (arr[j, k, i].value > target.value)
-                            {
-                                ArrayElement resElement1 = compareClosest(arr[j, k, i], resElement, target);
-                            }
                            
-                            }
-                        
-                      
-                         
+                                ArrayElement resElement1 = compareClosest(arr[j, k, i], resElement, target);
+                            }      
                     }
                 }
             }
@@ -139,7 +120,6 @@ namespace Task1
         //find the nearst element to the target
         public static ArrayElement compareClosest(ArrayElement element1, ArrayElement element2, ArrayElement target)
         {
-
             int targetPointSum = (target.x + target.y + target.z);
             int elm1pointSum= (element1.x + element1.y + element1.z);
             int elem2PointSum= (element2.x + element2.y + element2.z);
@@ -152,7 +132,6 @@ namespace Task1
             {
                 elm1 = elm1pointSum - targetPointSum;
             }
-
             if (targetPointSum > elem2PointSum)
             {
                 elm2 = targetPointSum - elem2PointSum;
@@ -173,8 +152,7 @@ namespace Task1
                 {
                     return element1;
                 }
-            
-         
+           
         }//end of compareClosest()
 
 
